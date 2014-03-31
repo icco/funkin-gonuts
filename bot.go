@@ -14,4 +14,14 @@ func main() {
 		fmt.Println("Failed connecting")
 		return
 	}
+	con.AddCallback("001", func(e *irc.Event) {
+		con.Join(roomName)
+	})
+	con.AddCallback("JOIN", func(e *irc.Event) {
+		con.Privmsg(roomName, "Hello! I am a friendly IRC bot who will echo everything you say.")
+	})
+	con.AddCallback("PRIVMSG", func(e *irc.Event) {
+		con.Privmsg(roomName, e.Message)
+	})
+	con.Loop()
 }

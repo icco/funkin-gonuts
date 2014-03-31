@@ -21,7 +21,7 @@ func main() {
 		con.Privmsg(roomName, "Hello! I am a friendly IRC bot who will echo everything you say.")
 	})
 	con.AddCallback("PRIVMSG", func(e *irc.Event) {
-		con.Privmsg(roomName, e.Message)
+		con.Privmsg(roomName, e.Message())
 	})
 	con.Loop()
 }
